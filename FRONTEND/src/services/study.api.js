@@ -1,7 +1,11 @@
 import axios from 'axios';
 
+const apiBaseUrl =
+  import.meta.env.VITE_API_URL?.trim() ||
+  (import.meta.env.DEV ? 'http://localhost:3000' : window.location.origin);
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:3000',
+  baseURL: apiBaseUrl,
 });
 
 /**
@@ -27,5 +31,4 @@ export async function generateResource(params) {
     throw error.response?.data || error;
   }
 }
-
 
